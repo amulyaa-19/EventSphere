@@ -10,10 +10,5 @@ router.get("/protected", authMiddleware, (req, res) => {
   });
 });
 
-router.post('/events', authMiddleware, isAdmin, (req, res) => {
-  res.json({
-    message: "event created by admin"
-  })
-})
 
 module.exports = router;
