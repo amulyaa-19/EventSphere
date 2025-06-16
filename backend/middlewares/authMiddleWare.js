@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken");
 
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
-  if(!authHeader || !authHeader.startsWith("Bearer")){
+  if (!authHeader || !authHeader.startsWith("Bearer")) {
     return res.status(401).json({
-      message: "Unauthorized, please provide a valid token"
+      message: "Unauthorized, please provide a valid token",
     });
   }
   const token = authHeader.split(" ")[1];
@@ -14,14 +14,14 @@ const authMiddleware = (req, res, next) => {
 
     req.user = {
       id: decoded.id,
-      role: decoded.role
+      role: decoded.role,
     };
     next();
   } catch (err) {
-      return res.status(401).json({
-        message: "Unauhtorized, please provide a valid token"
-      })
+    return res.status(401).json({
+      message: "Unauthorized, please provide a valid token",
+    });
   }
-}
+};
 
 module.exports = authMiddleware;

@@ -1,13 +1,15 @@
-const Event = require('../database/event');
+const Event = require("../database/event");
+const mongoose = require("mongoose");
 
-const registerEvent = async(req, res) => {
+//to create an event
+const registerEvent = async (req, res) => {
   try {
-    const{ title, description, location, price, date, image} = req.body;
+    const { title, description, location, price, date, image } = req.body;
 
-    if(!title || !date || price === undefined){
+    if (!title || !date || price === undefined) {
       return res.status(400).json({
-        message: "Title, date and price are required"
-      })
+        message: "Title, date and price are required",
+      });
     }
 
     const newEvent = await Event.create({
@@ -17,19 +19,96 @@ const registerEvent = async(req, res) => {
       price,
       date,
       image,
-      createdBy: req.user.id
-    })
+      createdBy: req.user.id,
+    });
 
     res.status(200).json({
       message: "Event created successfully",
-      event: newEvent
+      event: newEvent,
     });
-
   } catch (err) {
     res.status(500).json({
-      message: err.message
-    })
+      message: err.message,
+    });
   }
-}
+};
 
-module.exports = {registerEvent};
+const getAllEvents = async (req, res) => {
+  try {
+    const events = await Event.find().sort({ date: 1 });
+    res.status(200).json(events);
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+const getEventById = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({
+      message: "Invalid event id",
+    });
+  }
+  try {
+    const event = await Event.findById(req.params.id);
+
+    if (!event) {
+      return res.status(404).json({
+        message: "Event not found",
+      });
+    }
+
+    res.status(200).json({
+      event,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+const bookEvent = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({
+      message: "Invalid event id",
+    });
+  }
+
+  try {
+    const event = await Event.findById(id);
+
+    if (!event) {
+      return res.status(404).json({
+        message: "Event not found",
+      });
+    }
+    if (event.bookedUsers.includes(req.user.id)) {
+      return res.status(400).json({
+        message: "You have already registered for this event",
+      });
+    }
+
+    event.bookedUsers.push(req.user.id);
+    await event.save();
+
+    res.status(200).json({
+      message: "Event booked successfully",
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
+
+module.exports = {
+  registerEvent,
+  getAllEvents,
+  getEventById,
+  bookEvent,
+};
