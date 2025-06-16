@@ -106,9 +106,69 @@ const bookEvent = async (req, res) => {
   }
 };
 
+const cancelBooking = async  (req, res) => {
+  const eventId = req.params.id;
+  const userId = req.user.id;
+
+  try {
+    const event = await Event.findById(eventId);
+
+    if(!event){
+      return res.status(404).json({
+        message: "Event not found"
+      })
+    }
+
+    if(!event.bookedUsers || !event.bookedUsers.includes(userId)){
+      return res.status(400).json({
+        message: "You haven't booked this event"
+      })
+    }
+
+    event.bookedUsers = event.bookedUsers.filter(
+      (id) => id.toString() !== userId.toString()
+    )
+
+    await event.save();
+
+    return res.status(200).json({
+      message: "Booking cancelled successfully"
+    })
+  } catch (err) {
+    res.status(500).json({
+      message: err.message
+    })
+  }
+}
+
+const viewBooking = async (req, res) => {
+  const { id: eventId} = req.params;
+  try {
+    const event = await Event.findById(eventId).populate("bookedUsers", "name email");
+
+    if(!event){
+      return res.status(404).json({
+        message: "Event not found"
+      })
+    }
+
+    return res.status(200).json({
+      bookings: event.bookedUsers
+    })
+
+  } catch (err) {
+    res.status(500).json({
+      message: err.message
+    })
+  }
+}
+
+
 module.exports = {
   registerEvent,
   getAllEvents,
   getEventById,
   bookEvent,
+  cancelBooking,
+  viewBooking,
 };
