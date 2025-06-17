@@ -141,21 +141,19 @@ const cancelBooking = async  (req, res) => {
   }
 }
 
-const viewBooking = async (req, res) => {
-  const { id: eventId} = req.params;
+
+
+const searchEvents = async (req, res) => {
+  const keyword = req.query.keyword || "";
   try {
-    const event = await Event.findById(eventId).populate("bookedUsers", "name email");
+     const events = await Event.find({
+        title: { $regex: keyword, $options: "i"},
+        description: { $regex: keyword, $options: "i"}
+     })
 
-    if(!event){
-      return res.status(404).json({
-        message: "Event not found"
-      })
-    }
-
-    return res.status(200).json({
-      bookings: event.bookedUsers
-    })
-
+     res.status(200).json({
+      results: events,
+     })
   } catch (err) {
     res.status(500).json({
       message: err.message
@@ -163,12 +161,11 @@ const viewBooking = async (req, res) => {
   }
 }
 
-
 module.exports = {
   registerEvent,
   getAllEvents,
   getEventById,
   bookEvent,
   cancelBooking,
-  viewBooking,
+  searchEvents,
 };
