@@ -4,21 +4,21 @@ const mongoose = require("mongoose");
 //to create an event
 const registerEvent = async (req, res) => {
   try {
-    const { title, description, location, price, date, image } = req.body;
+    const { title, description, location, price, date, image} = req.body;
 
     if (!title || !date || price === undefined) {
       return res.status(400).json({
         message: "Title, date and price are required",
       });
     }
-
+    
     const newEvent = await Event.create({
       title,
       description,
       location,
       price,
       date,
-      image,
+      image: image || "",
       createdBy: req.user.id,
     });
 

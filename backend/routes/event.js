@@ -11,8 +11,9 @@ const {
 } = require("../controllers/eventController");
 const authMiddleware = require("../middlewares/authMiddleWare");
 const isAdmin = require("../middlewares/isAdmin");
+const upload = require('../middlewares/uploadImage');
 
-router.post("/", authMiddleware, isAdmin, registerEvent);
+router.post("/", authMiddleware, isAdmin, upload.single('image'),registerEvent);
 
 router.get("/", getAllEvents);
 
