@@ -1,57 +1,37 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/AuthContext";
-import { LogIn, LogOut, User } from "lucide-react";
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
-
   return (
-    <nav className="w-full px-6 py-3 fixed top-0 z-50 backdrop-blur-md bg-white/5 border-b border-white/10 h-15">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
-     
-        <Link to="/" className="text-white font-semibold text-3xl ">
-          EventSphere
-        </Link>
+    <div className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 bg-black/30 backdrop-blur-lg border border-white/10 rounded-full px-6 py-2 w-[90%] max-w-screen flex justify-between items-center shadow-md h-14">
+      <Link
+        to="/"
+        className="text-lg md:text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500"
+      >
+        EventSphere
+      </Link>
 
-        
-        <div className="flex items-center gap-6 text-lg text-gray-300 ">
-          <Link to="/events" className="hover:text-white transition">
-            Events
-          </Link>
-
-    
-          {user?.role === "admin" && (
-            <Link to="/admin" className="hover:text-white transition">
-              Admin
-            </Link>
-          )}
-
-          
-          {user ? (
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 text-gray-400">
-                <User size={18} />
-                <span>{user.name}</span>
-              </div>
-              <button
-                onClick={logout}
-                className="hover:text-red-400 transition flex items-center gap-1"
-              >
-                <LogOut size={18} />
-              </button>
-            </div>
-          ) : (
-            <Link
-              to="/login"
-              className="hover:text-white transition flex items-center gap-1"
-            >
-              <LogIn size={18} />
-              Login
-            </Link>
-          )}
-        </div>
+      <div className="hidden md:flex gap-8 text-gray-300 text-md font-medium">
+        <Link to="/" className="hover:text-pink-400 transition">Home</Link>
+        <Link to="/about" className="hover:text-pink-400 transition">About</Link>
+        <Link to="/events" className="hover:text-pink-400 transition">Events</Link>
+        <Link to="/contact" className="hover:text-pink-400 transition">Contact</Link>
       </div>
-    </nav>
+
+      <div className="flex gap-3 items-center">
+        <Link
+          to="/register"
+          className="px-4 py-1 rounded-full bg-white/10 text-gray-300 hover:bg-white/20 transition text-md"
+        >
+          Sign Up
+        </Link>
+        <Link
+          to="/login"
+          className="px-4 py-1 rounded-full bg-gradient-to-r from-pink-600 to-purple-600 text-white text-md font-medium hover:from-pink-500 hover:to-purple-500 transition"
+        >
+          Log In
+        </Link>
+      </div>
+    </div>
   );
 };
 

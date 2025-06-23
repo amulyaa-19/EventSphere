@@ -32,6 +32,9 @@ const eventSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  category: {
+    type: String,
+  },
   bookedUsers: [
     {
       type: mongoose.Schema.Types.ObjectId,
