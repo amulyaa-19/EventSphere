@@ -1,10 +1,5 @@
 import SpotlightCard from "../SpotlightCard/SpotlightCard";
-import {
-  ShieldCheck,
-  MousePointerClick,
-  Wrench,
-  Compass,
-} from "lucide-react";
+import { ShieldCheck, MousePointerClick, Wrench, Compass } from "lucide-react";
 
 const features = [
   {
@@ -35,7 +30,10 @@ const features = [
 
 const FeatureSection = () => {
   return (
-    <section className="py-24 px-6 bg-gradient-to-b from-[#1a1a1a] via-[#111] to-black text-white">
+    <section
+      id="features"
+      className="py-24 px-6 bg-gradient-to-b from-[#1a1a1a] via-[#111] to-black text-white"
+    >
       <h2 className="text-4xl md:text-5xl font-extrabold text-center mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500">
         Why EventSphere?
       </h2>

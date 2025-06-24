@@ -33,7 +33,10 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section className="py-20 px-6 bg-gradient-to-b from-[#1a1a1a] via-[#111] to-black text-white">
+    <section
+      id="about"
+      className="py-20 px-6 bg-gradient-to-b from-[#1a1a1a] via-[#111] to-black text-white"
+    >
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-rose-500">
@@ -76,7 +79,7 @@ const HowItWorksSection = () => {
         <div className="text-center mt-16">
           <p className="text-gray-300 mb-6">Ready to get started?</p>
           <button className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 hover:from-purple-500 hover:to-pink-500 transition-all duration-300 text-white font-semibold shadow-lg hover:scale-105">
-            Join EventSphere Now
+            <a href="register">Join EventSphere Now</a>
           </button>
         </div>
       </div>

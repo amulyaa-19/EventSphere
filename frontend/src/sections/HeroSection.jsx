@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 const HeroSection = () => {
   return (
     <section
+      id="home"
       className="relative min-h-screen flex items-center justify-center bg-no-repeat bg-cover bg-center text-white"
       style={{
         backgroundImage:

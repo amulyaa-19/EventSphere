@@ -11,10 +11,18 @@ const Navbar = () => {
       </Link>
 
       <div className="hidden md:flex gap-8 text-gray-300 text-md font-medium">
-        <Link to="/" className="hover:text-pink-400 transition">Home</Link>
-        <Link to="/about" className="hover:text-pink-400 transition">About</Link>
-        <Link to="/events" className="hover:text-pink-400 transition">Events</Link>
-        <Link to="/features" className="hover:text-pink-400 transition">Features</Link>
+        <a href="#home" className="hover:text-pink-400 transition">
+          Home
+        </a>
+        <a href="#events" className="hover:text-pink-400 transition">
+          Events
+        </a>
+        <a href="#features" className="hover:text-pink-400 transition">
+          Features
+        </a>
+        <a href="#about" className="hover:text-pink-400 transition">
+          About
+        </a>
       </div>
 
       <div className="flex gap-3 items-center">
