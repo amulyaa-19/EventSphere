@@ -1,36 +1,50 @@
-import { Calendar, MapPin } from "lucide-react";
-const EventCard = ({ event, onViewDetails }) => (
-  <div className="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-pink-500/30 transition-all duration-300 hover:scale-105">
-    <div className="relative">
+import { Calendar, MapPin, IndianRupee } from "lucide-react";
+
+const EventCard = ({ event, onViewDetails }) => {
+  return (
+    <div
+      className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg hover:shadow-pink-500/20 hover:scale-[1.02] transition-all duration-300 backdrop-blur-sm"
+    >
       <img
-        src={event.image}
+        src={event.image || "https://res.cloudinary.com/dtuhhy4ys/image/upload/v1750258403/event-images/pjv5mfsl6w2zthvcgmn9.png"}
         alt={event.title}
-        className="w-full h-48 object-cover"
+        className="h-48 w-full object-cover"
       />
-      <div className="absolute top-4 right-4 flex items-center justify-center">
-        <span className="px-3 py-1 bg-gradient-to-r from-purple-600/80 to-pink-600/80 backdrop-blur-md rounded-full text-xs font-medium text-white ">
-          {event.category}
-        </span>
+
+      <div className="p-4 space-y-2 text-white">
+        <div className="flex justify-between items-start">
+          <h3 className="text-xl font-semibold">{event.title}</h3>
+          {event.category && (
+            <span className="text-xs bg-pink-600 px-2 py-1 rounded-full">
+              {event.category}
+            </span>
+          )}
+        </div>
+
+        <div className="flex items-center gap-2 text-sm text-gray-300">
+          <Calendar className="w-4 h-4" />
+          {new Date(event.date).toLocaleDateString()}
+        </div>
+
+        <div className="flex items-center gap-2 text-sm text-gray-300">
+          <MapPin className="w-4 h-4" />
+          {event.venue || event.location || "TBA"}
+        </div>
+
+        <div className="flex items-center gap-2 text-sm text-gray-300">
+          <IndianRupee className="w-4 h-4" />
+          {event.price}
+        </div>
+
+        <button
+          onClick={() => onViewDetails(event)}
+          className="w-full mt-3 bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 py-2 rounded-md font-semibold text-sm cursor-pointer"
+        >
+          View Details
+        </button>
       </div>
     </div>
-    <div className="p-6">
-      <h3 className="text-xl font-semibold text-white mb-2">{event.title}</h3>
-      <div className="flex items-center text-gray-400 text-sm mb-3">
-        <Calendar className="w-4 h-4 mr-2" />
-        {event.date}
-      </div>
-      <div className="flex items-center text-gray-400 text-sm mb-4">
-        <MapPin className="w-4 h-4 mr-2" />
-        {event.venue}
-      </div>
-      <button
-        onClick={() => onViewDetails(event)}
-        className="w-full py-2 border-1 hover:bg-white/10 rounded-lg text-white font-medium transition-all duration-300"
-      >
-        View Details
-      </button>
-    </div>
-  </div>
-);
+  );
+};
 
 export default EventCard;

@@ -141,8 +141,6 @@ const cancelBooking = async  (req, res) => {
   }
 }
 
-
-
 const searchEvents = async (req, res) => {
   const keyword = req.query.keyword || "";
   try {
@@ -160,6 +158,7 @@ const searchEvents = async (req, res) => {
     })
   }
 }
+
 
 module.exports = {
   registerEvent,
