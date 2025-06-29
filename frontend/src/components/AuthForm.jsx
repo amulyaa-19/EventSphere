@@ -40,7 +40,7 @@ const AuthForm = ({ type = "register", onSubmit }) => {
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
       toast.success("Login Sucessful!");
-      navigate("/");
+      navigate("/dashboard");
     }
     
   } catch (err) {

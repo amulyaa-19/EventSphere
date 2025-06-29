@@ -1,5 +1,5 @@
 import { Calendar, MapPin } from "lucide-react";
-const EventCard = ({ event }) => (
+const EventCard = ({ event, onViewDetails }) => (
   <div className="bg-white/5 backdrop-blur-md rounded-xl overflow-hidden border border-white/10 hover:border-pink-500/30 transition-all duration-300 hover:scale-105">
     <div className="relative">
       <img
@@ -24,10 +24,10 @@ const EventCard = ({ event }) => (
         {event.venue}
       </div>
       <button
-        href="/login"
+        onClick={() => onViewDetails(event)}
         className="w-full py-2 border-1 hover:bg-white/10 rounded-lg text-white font-medium transition-all duration-300"
       >
-        View More
+        View Details
       </button>
     </div>
   </div>

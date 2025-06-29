@@ -1,5 +1,4 @@
-// App.jsx
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Login from "./pages/LogIn";
@@ -8,26 +7,45 @@ import HeroSection from "./sections/HeroSection";
 import EventsSection from "./sections/EventSection";
 import FeatureSection from "./sections/FeatureSection";
 import HowItWorksSection from "./sections/HowItWorksSection";
-
-const HomeLayout = () => (
-  <>
-    <Navbar />
-    <HeroSection />
-    <EventsSection />
-    <FeatureSection />
-    <HowItWorksSection />
-    <Footer />
-  </>
-);
+import Dashboard from "./pages/Dashboard";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
+  const location = useLocation();
+
+  const hideNavAndFooter = ["/login", "/register", "/dashboard"].includes(
+    location.pathname
+  );
   return (
-    <Routes>
-      <Route path="/" element={<HomeLayout />} />
-      <Route path="/events" element={<HomeLayout />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-    </Routes>
+    <>
+      {!hideNavAndFooter && <Navbar />}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <HeroSection />
+              <EventsSection />
+              <FeatureSection />
+              <HowItWorksSection />
+              <Footer />
+            </>
+          }
+        />
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
+      </Routes>
+    </>
   );
 }
 
