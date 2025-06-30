@@ -85,28 +85,44 @@ const deleteEvent = async (req, res) => {
   }
 };
 
-const uploadImage = async(req, res) => {
+const uploadImage = async (req, res) => {
   try {
-    if(!req.file){
+    if (!req.file) {
       return res.status(400).json({
-        message: "No image provided"
+        message: "No image provided",
       });
     }
 
     res.status(200).json({
       message: "Image uploaded successfully",
       imageUrl: req.file.path,
-    })
+    });
   } catch (err) {
     res.status(500).json({
-      message: err.message
-    })
+      message: err.message,
+    });
   }
-}
+};
 
+const getAdminEvents = async (req, res) => {
+  try {
+    const adminId = req.user.id;
+    const events = await Event.find({ createdBy: adminId }).sort({ date: 1 });
+
+    return res.status(200).json({
+      message: "Admin events fetched successfully",
+      events,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: err.message,
+    });
+  }
+};
 module.exports = {
   viewBooking,
   updateEvent,
   deleteEvent,
-  uploadImage
+  uploadImage,
+  getAdminEvents,
 };

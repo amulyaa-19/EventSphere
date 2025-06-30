@@ -6,7 +6,7 @@ const EventCard = ({ event, onViewDetails }) => {
       className="bg-white/5 border border-white/10 rounded-2xl overflow-hidden shadow-lg hover:shadow-pink-500/20 hover:scale-[1.02] transition-all duration-300 backdrop-blur-sm"
     >
       <img
-        src={event.image || "https://res.cloudinary.com/dtuhhy4ys/image/upload/v1750258403/event-images/pjv5mfsl6w2zthvcgmn9.png"}
+        src={event.image || "https://res.cloudinary.com/dtuhhy4ys/image/upload/v1751310194/pexels-eberhardgross-1421903_xnbakj.jpg"}
         alt={event.title}
         className="h-48 w-full object-cover"
       />

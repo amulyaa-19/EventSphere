@@ -9,11 +9,12 @@ import FeatureSection from "./sections/FeatureSection";
 import HowItWorksSection from "./sections/HowItWorksSection";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoute from "./components/PrivateRoute";
+import AdminDashboard from "./pages/AdminDashboard";
 
 function App() {
   const location = useLocation();
 
-  const hideNavAndFooter = ["/login", "/register", "/dashboard"].includes(
+  const hideNavAndFooter = ["/login", "/register", "/dashboard", "/admin"].includes(
     location.pathname
   );
   return (
@@ -43,6 +44,13 @@ function App() {
               <Dashboard />
             </PrivateRoute>
           }
+        />
+
+        <Route
+          path="/admin"
+          element={
+              <AdminDashboard/>
+          }  
         />
       </Routes>
     </>

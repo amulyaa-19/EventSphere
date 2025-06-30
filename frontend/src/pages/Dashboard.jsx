@@ -44,7 +44,6 @@ const Dashboard = () => {
           "url('https://res.cloudinary.com/dtuhhy4ys/image/upload/v1750258403/event-images/pjv5mfsl6w2zthvcgmn9.png')",
       }}
     >
-      {/* 🔲 Dark overlay */}
       <div className="absolute inset-0 bg-black/60 backdrop-blur-md z-0" />
 
       <aside className="w-64 bg-white/5 border-r border-white/10 p-6 hidden md:flex flex-col gap-8 z-10">

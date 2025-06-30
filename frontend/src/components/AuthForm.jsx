@@ -24,29 +24,38 @@ const AuthForm = ({ type = "register", onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  try {
-    if (type === "register") {
-      const res = await axios.post(`${BASE_URL}/api/auth/register`, formData);
-  
-      toast.success("Registered successfully!");
+    try {
+      if (type === "register") {
+        const res = await axios.post(`${BASE_URL}/api/auth/register`, formData);
 
-      navigate("/login");
+        toast.success("Registered successfully!");
+
+        navigate("/login");
+      }
+
+      if (type === "login") {
+        const res = await axios.post(`${BASE_URL}/api/auth/login`, formData);
+
+        const user = res.data.user;
+        const role = user.role;
+
+        localStorage.setItem("token", res.data.token);
+        localStorage.setItem("user", JSON.stringify({ ...user, role }));
+
+        toast.success("Login Sucessful!");
+
+        if (role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/dashboard");
+        }
+      }
+    } catch (err) {
+      toast.error(
+        err.response?.data?.message || "Something went wrong. Try again."
+      );
     }
-
-    if(type === "login") {
-      const res = await axios.post(`${BASE_URL}/api/auth/login`, formData);
-
-      localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-
-      toast.success("Login Sucessful!");
-      navigate("/dashboard");
-    }
-    
-  } catch (err) {
-    toast.error(err.response?.data?.message || "Something went wrong. Try again.");
-  }
-};
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
