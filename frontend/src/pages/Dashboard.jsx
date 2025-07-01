@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import EventCard from "../components/EventCard";
 import Modal from "../components/Modal";
 import axios from "axios";
-import { CalendarDays, LogOut, Calendar, X } from "lucide-react";
+import { CalendarDays, LogOut, Calendar, X, Plus } from "lucide-react";
 import EventRegistrationForm from "../components/EventRegistrationForm";
 
 const Dashboard = () => {
@@ -74,10 +74,21 @@ const Dashboard = () => {
 
       <main className="flex-1 p-6 z-10 overflow-y-auto items-center text-center">
         <div className="mb-10">
-          <h2 className="text-3xl font-bold text-white mb-1">Hello, {user?.name}</h2>
+          <h2 className="text-3xl font-bold text-white mb-1">
+            Hello, {user?.name}
+          </h2>
           <p className="text-gray-400 text-md">
             Browse and register for upcoming events.
           </p>
+        </div>
+        <div className="md:hidden mb-6 flex justify-end">
+          <button
+            onClick={handleLogout}
+            className="bg-white/10 hover:bg-white/20 border border-white/20 px-4 py-2 rounded-lg flex items-center gap-2 text-white hover:text-pink-400 transition"
+          >
+            <LogOut className="w-4 h-4" />
+            Logout
+          </button>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -108,7 +119,7 @@ const Dashboard = () => {
                 onClick={() => setRegisteringEvent(null)}
                 className="absolute top-4 right-4 text-white hover:text-pink-400 transition"
               >
-                <X className="cursor-pointer"/>
+                <X className="cursor-pointer" />
               </button>
               <h2 className="text-xl font-bold mb-4 text-center">
                 Event Registration

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Calendar, MapPin, Pencil, IndianRupee, Eye, Plus } from "lucide-react";
+import { Calendar, MapPin, Pencil, IndianRupee, Eye, Plus, LogOut } from "lucide-react";
 import { useEffect, useState } from "react";
 import CreateEventModal from "../components/CreateEventModal";
 import EditEventModal from "../components/EditEventModal";
@@ -46,6 +46,12 @@ const AdminDashboard = () => {
     fetchAdminEvents();
   }, []);
 
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/login");
+  };
+
   return (
     <div
       className="min-h-screen flex bg-no-repeat bg-cover bg-center text-white relative"
@@ -55,26 +61,45 @@ const AdminDashboard = () => {
       }}
     >
       <div className="absolute inset-0 bg-black/70 backdrop-blur-md z-0" />
-
+      
       <aside className="w-64 bg-white/5 border-white/10 p-6 hidden md:flex flex-col gap-8 z-10">
         <h2 className="text-2xl font-bold mb-5 mt-5">Admin Panel</h2>
         <ul className="space-y-4 text-md">
-          <li className="hover:text-pink-400 cursor-pointer">Create Event</li>
+          <li 
+            onClick={toggleModal}
+            className="hover:text-pink-400 cursor-pointer">Create Event</li>
           <li className="hover:text-pink-400 cursor-pointer">All Events</li>
-          <li className="hover:text-pink-400 cursor-pointer">Logout</li>
+          <li
+            onClick={handleLogout}
+            className="hover:text-pink-400 cursor-pointer"
+          >
+            Logout
+          </li>
         </ul>
       </aside>
 
       <div className="flex-1 p-8 z-10 overflow-y-auto w-full">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-3xl font-bold">All Events</h1>
-          <button
-            onClick={toggleModal}
-            className="flex items-center gap-2 bg-pink-600 hover:bg-pink-500 transition px-4 py-2 rounded-md text-sm font-semibold cursor-pointer"
-          >
-            <Plus className="w-4 h-4" />
-            Create Event
-          </button>
+          
+          <div className="flex items-center gap-3">
+            <button
+              onClick={toggleModal}
+              className="flex items-center gap-2 bg-pink-600 hover:bg-pink-500 transition px-4 py-2 rounded-md text-sm font-semibold cursor-pointer"
+            >
+              <Plus className="w-4 h-4" />
+              <span className="hidden sm:inline">Create Event</span>
+              <span className="sm:hidden">Create</span>
+            </button>
+            
+            <button
+              onClick={handleLogout}
+              className="md:hidden flex items-center gap-2 border hover:bg-red-500 transition px-4 py-2 rounded-md text-sm font-semibold cursor-pointer"
+            >
+              <LogOut className="w-4 h-4" />
+              <span className="hidden sm:inline">Logout</span>
+            </button>
+          </div>
         </div>
 
         <CreateEventModal
@@ -132,21 +157,13 @@ const AdminDashboard = () => {
                     : event.price}
                 </div>
 
-                <div className="flex gap-3 mt-4">
+                <div className="flex gap-3 mt-4 ">
                   <button
                     onClick={() => openEditModal(event)}
-                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-500 transition px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
+                    className="flex w-full items-center text-center gap-2 bg-gradient-to-r from-blue-600 via-25% to-blue-400 transition px-4 py-2 rounded-md text-md font-semibold cursor-pointer"
                   >
-                    <Pencil className="w-4 h-4" />
-                    Edit
-                  </button>
-
-                  <button
-                    onClick={() => console.log("View Bookings", event._id)}
-                    className="flex items-center gap-2 bg-pink-600 hover:bg-pink-500 transition px-4 py-2 rounded-md text-sm font-medium cursor-pointer"
-                  >
-                    <Eye className="w-4 h-4" />
-                    View Bookings
+                    <Pencil className="w-4 h-4 " />
+                    Edit Event Details
                   </button>
                 </div>
               </div>
