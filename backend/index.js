@@ -13,7 +13,10 @@ const eventRegistrationRoutes = require('./routes/eventRegistrationRoutes');
 connectDB();
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5174",
+  credentials: true,
+}));
 app.use(express.json());
 
 app.use('/api/auth', authRoutes);
@@ -22,6 +25,7 @@ app.use('/api/events', eventRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api',eventRegistrationRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {

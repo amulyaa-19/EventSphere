@@ -14,9 +14,12 @@ import AdminDashboard from "./pages/AdminDashboard";
 function App() {
   const location = useLocation();
 
-  const hideNavAndFooter = ["/login", "/register", "/dashboard", "/admin"].includes(
-    location.pathname
-  );
+  const hideNavAndFooter = [
+    "/login",
+    "/register",
+    "/dashboard",
+    "/admin",
+  ].includes(location.pathname);
   return (
     <>
       {!hideNavAndFooter && <Navbar />}
@@ -46,12 +49,7 @@ function App() {
           }
         />
 
-        <Route
-          path="/admin"
-          element={
-              <AdminDashboard/>
-          }  
-        />
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
     </>
   );

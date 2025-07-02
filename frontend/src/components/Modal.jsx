@@ -4,7 +4,6 @@ import { useState } from "react";
 
 const Modal = ({ event, onClose, onRegisterClick }) => {
   const user = JSON.parse(localStorage.getItem("user"));
- const [showRegistration, setShowRegistration] = useState(false);
  
   if (!event) return null;
 
