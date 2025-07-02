@@ -3,7 +3,7 @@ const EventRegistration = require("../database/eventRegistration");
 const registerForEvent = async (req, res) => {
   try {
     const {eventId, email, college, mobile, name} = req.body;
-    const userId = req.user.id;
+    const userId = req.userId;
      
     if(!eventId || !name || !email || !college || !mobile) {
       return res.status(400).json({

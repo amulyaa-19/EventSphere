@@ -116,7 +116,7 @@ const AuthForm = ({ type = "register", onSubmit }) => {
 
       <button
         type="submit"
-        className="w-full py-2 px-2 border-1 hover:bg-white/10 transition rounded-md text-white font-semibold"
+        className="w-full py-2 px-2 border-1 hover:bg-white/10 transition rounded-md text-white font-semibold cursor-pointer"
       >
         {type === "register" ? "Sign Up" : "Log In"}
       </button>

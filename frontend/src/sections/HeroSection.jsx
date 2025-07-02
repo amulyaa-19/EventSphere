@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
@@ -28,11 +27,11 @@ const HeroSection = () => {
           <span className="text-pink-400 font-medium">EventSphere</span>.
         </p>
 
-        <Link to="/events">
-          <button className="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 hover:from-purple-500 hover:to-pink-500 transition-all duration-300 text-white text-base font-semibold shadow-lg hover:scale-105 animate-pulse">
+        <a href='#events'>
+          <button className="mt-6 inline-flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 hover:from-purple-500 hover:to-pink-500 transition-all duration-300 text-white text-base font-semibold shadow-lg hover:scale-105 animate-pulse cursor-pointer">
             Explore Events <ArrowRight className="w-5 h-5" />
           </button>
-        </Link>
+        </a>
       </div>
     </section>
   );

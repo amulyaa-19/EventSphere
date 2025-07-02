@@ -1,5 +1,6 @@
 import AuthForm from "../components/AuthForm";
 import { Link } from "react-router-dom";
+import GoogleLoginButton from "../components/GoogleLoginButton";
 
 const Register = () => {
   return (
@@ -21,6 +22,10 @@ const Register = () => {
         </h2>
 
         <AuthForm type="register" onSubmit={(data) => console.log(data)} />
+        <p className="text-center text-sm text-gray-400 mt-4 mb-4">
+          Or 
+        </p>
+        <GoogleLoginButton />
         <p className="mt-10 text-center text-md text-gray-300">
           Already have an account?{" "}
           <Link
