@@ -14,7 +14,7 @@ connectDB();
 
 const app = express();
 app.use(cors({
-  origin: "http://localhost:5174",
+  origin: "https://event-sphere-coral.vercel.app",
   credentials: true,
 }));
 app.use(express.json());
