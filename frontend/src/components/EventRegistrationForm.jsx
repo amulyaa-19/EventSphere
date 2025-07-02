@@ -1,13 +1,18 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
+import { getAuth } from "firebase/auth";
+import app from "../firebase";
 
 const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
-const EventRegistrationForm = ({ event, user }) => {
+const EventRegistrationForm = ({ event }) => {
+  const auth = getAuth(app);
+  const currentUser = auth.currentUser;
+
   const [formData, setFormData] = useState({
-    name: user?.name || "",
-    email: user?.email || "",
+    name: currentUser?.displayName || "",
+    email: currentUser?.email || "",
     college: "",
     mobile: "",
   });
@@ -24,14 +29,23 @@ const EventRegistrationForm = ({ event, user }) => {
   const handleRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
+
     try {
-      const token = localStorage.getItem("token");
+      const user = auth.currentUser;
+
+      if (!user) {
+        toast.error("You must be logged in to register.");
+        setLoading(false);
+        return;
+      }
+
+      const token = await user.getIdToken();
 
       const res = await axios.post(
         `${BASE_URL}/api/event/register`,
         {
-          eventId: event._id,
           ...formData,
+          eventId: event._id,
         },
         {
           headers: {
@@ -40,9 +54,10 @@ const EventRegistrationForm = ({ event, user }) => {
         }
       );
 
-      toast.success(res.data.message || "Registered Successfully!");
+      toast.success(res.data.message || "Registered successfully!");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Registration failed");
+      console.error("Registration error:", err);
+      toast.error(err.response?.data?.message || "Registration failed.");
     } finally {
       setLoading(false);
     }

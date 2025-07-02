@@ -74,7 +74,6 @@ const googleLogin = async (req, res) => {
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
-    console.log("✅ Decoded Firebase token:", decodedToken);
 
     const { email, name, picture } = decodedToken;
 
@@ -104,7 +103,6 @@ const googleLogin = async (req, res) => {
       },
     });
   } catch (err) {
-    console.error("❌ Firebase token verification failed:", err.message);
     res.status(401).json({ message: "Invalid Firebase token" });
   }
 };

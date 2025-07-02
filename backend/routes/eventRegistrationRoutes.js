@@ -1,9 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { registerForEvent } = require("../controllers/eventRegistrationController");
-const authMiddleware = require("../middlewares/authMiddleWare");
- 
+const { verifyFirebaseToken } = require("../middlewares/authMiddleWare") 
 
-router.post("/event/register", authMiddleware, registerForEvent);
+router.post("/event/register", verifyFirebaseToken, registerForEvent);
 
 module.exports = router;

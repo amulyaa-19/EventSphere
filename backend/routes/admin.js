@@ -1,5 +1,5 @@
 const express = require('express');
-const authMiddleware = require('../middlewares/authMiddleWare');
+const { authMiddleware } = require('../middlewares/authMiddleWare');
 const { viewBooking, updateEvent, deleteEvent, uploadImage, getAdminEvents } = require('../controllers/adminController');
 const isAdmin = require('../middlewares/isAdmin');
 const upload = require('../middlewares/uploadImage');

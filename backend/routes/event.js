@@ -9,7 +9,7 @@ const {
   cancelBooking,
   searchEvents,
 } = require("../controllers/eventController");
-const authMiddleware = require("../middlewares/authMiddleWare");
+const { authMiddleware } = require('../middlewares/authMiddleWare')
 const isAdmin = require("../middlewares/isAdmin");
 const upload = require('../middlewares/uploadImage');
 

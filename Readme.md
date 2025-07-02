@@ -10,7 +10,7 @@ EventSphere is a modern event booking and registration platform built with the M
   Users can browse all upcoming campus events in one place with a clean and intuitive layout.
 
 - **User Registration & Login**  
-  Secure account creation using hashed passwords with JWT-based authentication.
+  Secure account creation using Firebase Authentication with Google Sign-In.
 
 - **Role-Based Dashboards**  
   - **Users** can explore events and register.  
@@ -21,9 +21,10 @@ EventSphere is a modern event booking and registration platform built with the M
 
 ### Google Sign-In Integration
 
-- Google OAuth 2.0 login using Passport.js
-- Users can sign in with their Google account
-- Integrated with existing JWT-based authentication system
+- Secure login using **Firebase Authentication with Google Sign-In**
+- Firebase issues ID tokens that are verified in the backend using **Firebase Admin SDK**
+- No manual password handling or session management required
+- Event registrations are tied to the authenticated Firebase UID
 
 ### Admin Features
 
@@ -42,6 +43,5 @@ EventSphere is a modern event booking and registration platform built with the M
 
 - **Frontend:** React, Vite, Tailwind CSS, React Router, Axios  
 - **Backend:** Node.js, Express, MongoDB, Mongoose  
-- **Authentication:** JWT, Passport.js (Google OAuth 2.0)  
+- **Authentication:** Firebase Authentication (Google Sign-In), Firebase Admin SDK  
 - **Image Handling:** Cloudinary REST API for image uploads
-
