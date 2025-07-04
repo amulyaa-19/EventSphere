@@ -49,7 +49,7 @@ const Dashboard = () => {
       <aside className="w-64 bg-white/5 border-r border-white/10 p-6 hidden md:flex flex-col gap-8 z-10">
         <div>
           <h2 className="text-xl font-bold mb-10 flex items-center gap-2">
-            <Calendar className="w-5 h-5" /> EventSphere
+            <Calendar className="w-5 h-5" /> <a href="/">EventSphere</a>
           </h2>
 
           <ul className="space-y-6 text-md">

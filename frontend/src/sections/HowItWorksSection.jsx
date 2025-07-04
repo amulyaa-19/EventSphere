@@ -79,7 +79,7 @@ const HowItWorksSection = () => {
         <div className="text-center mt-16">
           <p className="text-gray-300 mb-6">Ready to get started?</p>
           <button className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-600 via-pink-600 to-rose-500 hover:from-purple-500 hover:to-pink-500 transition-all duration-300 text-white font-semibold shadow-lg hover:scale-105">
-            <a href="register">Join EventSphere Now</a>
+            <a href="/register">Join EventSphere Now</a>
           </button>
         </div>
       </div>
