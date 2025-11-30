@@ -70,7 +70,7 @@ const googleLogin = async (req, res) => {
   }
 
   const idToken = authHeader.split(" ")[1];
-  console.log("🔐 Incoming Firebase token:", idToken);
+  console.log("Incoming Firebase token:", idToken);
 
   try {
     const decodedToken = await admin.auth().verifyIdToken(idToken);
